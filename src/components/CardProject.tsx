@@ -9,11 +9,11 @@ const CardProject: FC<CardProjectProps> = ({ className, ...props }) => {
 	return (
 		<section
 			{...props}
-			className={`h-[400px] cursor-pointer overflow-hidden rounded-[24px] bg-zinc-800 shadow-2xl transition-[width] duration-200 ease-linear 
+			className={`relative h-[500px] w-12 cursor-pointer overflow-hidden rounded-[24px] bg-transparent shadow-2xl transition-[width]  duration-200 ease-linear md:h-[400px]
             ${className}
             `}
 		></section>
 	);
 };
 
-export default CardProject;
+export { CardProject };

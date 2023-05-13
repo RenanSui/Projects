@@ -1,5 +1,5 @@
 'use client';
-import CardProject from '@/src/components/CardProject';
+import { CardProject } from '@/src/components/CardProject';
 import { darkTheme, lightTheme, useColorMode } from '@/src/hooks/useColorMode';
 import { useState } from 'react';
 import { BsCardChecklist, BsFillMoonStarsFill } from 'react-icons/bs';
@@ -65,22 +65,30 @@ export default function Home() {
 			className={`h-screen text-zinc-900 transition-all duration-500 dark:text-zinc-300 
 			${lightTheme} ${darkTheme}`}
 		>
-			<div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center transition-all duration-300">
+			<div className="absolute left-1/2 top-1/2 flex w-[calc(100%_-_4px)] -translate-x-1/2 -translate-y-1/2 justify-center transition-all duration-300 ">
 				{Projects.map((project, index) => (
 					<CardProject
 						key={index}
 						onClick={() => toggleAccordion(index)}
-						className={`relative
-						${accordion === index ? 'w-[580px]' : 'mx-2 w-12'}`}
+						className={`${
+							accordion === index
+								? 'mx-0 w-full max-w-[580px] sm:w-[580px]'
+								: 'mx-1 w-12 sm:flex-shrink-0'
+						} 
+                    ${
+						accordion < index - 1 || accordion > index + 1
+							? 'hidden md:block'
+							: ''
+					}`}
 					>
 						<div
-							className={`relative flex h-full w-full items-end justify-end bg-center`}
+							className={`relative flex h-full w-full items-end justify-end bg-cover bg-center`}
 							style={{
 								backgroundImage: `${project.imagePreview}`,
 							}}
 						>
 							<div
-								className={`absolute flex gap-4 rounded-2xl bg-[#ffffffbd] p-4 transition-all duration-300 ${
+								className={`absolute flex flex-col items-center gap-4 rounded-2xl bg-[#ffffffbd] p-4 transition-all duration-300 md:flex-row ${
 									accordion === index
 										? 'bottom-2 left-2 right-2'
 										: '-left-96 -right-96 bottom-2 opacity-0'
@@ -124,18 +132,16 @@ export default function Home() {
 							/>
 							<div
 								className={`bg-[#1111114f] backdrop-blur-lg transition-all duration-300 
-								${
-									accordion === index
-										? 'opacity-0'
-										: 'absolute bottom-0 left-0 right-0 top-0'
-								}`}
+                        ${
+							accordion === index
+								? 'opacity-0'
+								: 'absolute bottom-0 left-0 right-0 top-0'
+						}`}
 							/>
 						</div>
 					</CardProject>
 				))}
 			</div>
-
-			{/* #0D1619 */}
 
 			<button
 				onClick={() =>
