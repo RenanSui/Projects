@@ -3,7 +3,7 @@ import { CardProject } from '@/src/components/CardProject';
 import { darkTheme, lightTheme, useColorMode } from '@/src/hooks/useColorMode';
 import { useState } from 'react';
 import { BsCardChecklist, BsFillMoonStarsFill } from 'react-icons/bs';
-import { FaRegMoneyBillAlt, FaSun } from 'react-icons/fa';
+import { FaGithub, FaRegMoneyBillAlt, FaSun } from 'react-icons/fa';
 import { MdCatchingPokemon } from 'react-icons/md';
 import { TiWeatherStormy } from 'react-icons/ti';
 
@@ -94,19 +94,36 @@ export default function Home() {
 										: '-left-96 -right-96 bottom-2 opacity-0'
 								}`}
 							>
-								<div
-									className={`relative z-50 h-11 w-11 rounded-full bg-[#0B525B] p-2`}
-								>
-									<project.icon
-										className={`h-7 w-7 text-white`}
-									/>
+								<div className="flex gap-1">
+									<div
+										className={`relative z-50 h-11 w-11 rounded-full bg-[#0B525B] p-2`}
+									>
+										<project.icon className="h-7 w-7 text-white" />
+									</div>
+									<a
+										href={`${project.githubLink}`}
+										target="_blank"
+										rel="noreferrer"
+										className={`relative z-50 block h-11 w-11 rounded-full bg-[#03171a] p-2 md:hidden`}
+									>
+										<FaGithub className="h-7 w-7 text-white" />
+									</a>
 								</div>
+
 								<div className="flex flex-col text-black">
 									<h1 className="font-medium">
 										{project.name}
 									</h1>
 									<p className="">{project.description}</p>
 								</div>
+								<a
+									href={`${project.githubLink}`}
+									target="_blank"
+									rel="noreferrer"
+									className={`relative z-50 hidden h-11 w-11 rounded-full bg-[#03171a] p-2 md:inline`}
+								>
+									<FaGithub className="h-7 w-7 text-white" />
+								</a>
 							</div>
 							<div
 								className={`absolute z-50 h-11 w-11 rounded-full bg-[#0B525B] p-2 ${
@@ -126,9 +143,9 @@ export default function Home() {
 							<a
 								href={`${project.liveDemoLink}`}
 								target="_blank"
+								rel="noreferrer"
 								className={` transition-all duration-300
 								${accordion === index ? 'absolute bottom-0 left-0 right-0 top-0' : ''}`}
-								rel="noreferrer"
 							/>
 							<div
 								className={`bg-[#1111114f] backdrop-blur-lg transition-all duration-300 
