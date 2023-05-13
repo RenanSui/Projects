@@ -1,6 +1,6 @@
 'use client';
 import CardProject from '@/src/components/CardProject';
-import { useColorMode } from '@/src/hooks/useColorMode';
+import { darkTheme, lightTheme, useColorMode } from '@/src/hooks/useColorMode';
 import { useState } from 'react';
 import { BsCardChecklist, BsFillMoonStarsFill } from 'react-icons/bs';
 import { FaRegMoneyBillAlt, FaSun } from 'react-icons/fa';
@@ -12,7 +12,7 @@ const Projects = [
 		id: 0,
 		name: 'Weather App',
 		description:
-			'Weather App with search option calling an external rest-API.',
+			'Enable users to get instant alerts regarding weather conditions;',
 		githubLink: 'https://github.com/RenanSui/weather-app',
 		liveDemoLink: 'https://ren-weatherapp.vercel.app',
 		imagePreview: 'url(/images/project_0.png)',
@@ -21,7 +21,8 @@ const Projects = [
 	{
 		id: 1,
 		name: 'Expense Tracker',
-		description: 'Expense Tracker with CRUD-functionality.',
+		description:
+			'Recording all your expenditures so you have a clear and detailed understanding of your budget.',
 		githubLink: 'https://github.com/RenanSui/expense-tracker',
 		liveDemoLink: 'https://renansui.github.io/expense-tracker/',
 		imagePreview: 'url(/images/project_1.png)',
@@ -30,7 +31,8 @@ const Projects = [
 	{
 		id: 2,
 		name: 'Todo App',
-		description: 'A Todolist app with basic CRUD-functionality.',
+		description:
+			'Offer a way to increase productivity, stopping you from forgetting things, helps prioritise tasks, manage tasks effectively, etc.',
 		githubLink: 'https://github.com/RenanSui/todoList',
 		liveDemoLink: 'https://ren-todolist.vercel.app',
 		imagePreview: 'url(/images/project_2.png)',
@@ -60,7 +62,8 @@ export default function Home() {
 
 	return (
 		<main
-			className={`bg-lightGradient h-screen text-zinc-900 transition-all duration-500 dark:bg-[radial-gradient(circle,_hsla(197,_19%,_19%,_1)_0%,_hsla(195,_32%,_7%,_1)_100%)] dark:text-zinc-300`}
+			className={`h-screen text-zinc-900 transition-all duration-500 dark:text-zinc-300 
+			${lightTheme} ${darkTheme}`}
 		>
 			<div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center transition-all duration-300">
 				{Projects.map((project, index) => (
@@ -71,34 +74,61 @@ export default function Home() {
 						${accordion === index ? 'w-[580px]' : 'mx-2 w-12'}`}
 					>
 						<div
-							className={`absolute z-10 rounded-full bg-[#0B525B] p-2 
-							${
-								accordion === index
-									? 'bottom-6 left-8'
-									: 'bottom-8 left-1/2 -translate-x-1/2'
-							}`}
-						>
-							<project.icon
-								className={` text-white 
-								${accordion === index ? 'h-7 w-7' : 'h-4 w-4'}`}
-							/>
-						</div>
-						<div
-							className={`h-full w-full bg-center`}
+							className={`relative flex h-full w-full items-end justify-end bg-center`}
 							style={{
 								backgroundImage: `${project.imagePreview}`,
 							}}
 						>
+							<div
+								className={`absolute flex gap-4 rounded-2xl bg-[#ffffffbd] p-4 transition-all duration-300 ${
+									accordion === index
+										? 'bottom-2 left-2 right-2'
+										: '-left-96 -right-96 bottom-2 opacity-0'
+								}`}
+							>
+								<div
+									className={`relative z-50 h-11 w-11 rounded-full bg-[#0B525B] p-2`}
+								>
+									<project.icon
+										className={`h-7 w-7 text-white`}
+									/>
+								</div>
+								<div className="flex flex-col text-black">
+									<h1 className="font-medium">
+										{project.name}
+									</h1>
+									<p className="">{project.description}</p>
+								</div>
+							</div>
+							<div
+								className={`absolute z-50 h-11 w-11 rounded-full bg-[#0B525B] p-2 ${
+									accordion === index
+										? 'opacity-0'
+										: 'bottom-9 left-1/2 h-8 w-8 -translate-x-1/2 opacity-100'
+								}`}
+							>
+								<project.icon
+									className={`text-white ${
+										accordion === index
+											? 'h-7 w-7'
+											: 'h-4 w-4'
+									}`}
+								/>
+							</div>
 							<a
 								href={`${project.liveDemoLink}`}
 								target="_blank"
-								className={`
-								${accordion === index ? 'block h-full w-full' : ''}`}
+								className={` transition-all duration-300
+								${accordion === index ? 'absolute bottom-0 left-0 right-0 top-0' : ''}`}
 								rel="noreferrer"
 							/>
 							<div
-								className={`h-full w-full bg-[#1111114f] backdrop-blur-lg transition-all duration-300 
-								${accordion === index ? 'opacity-0' : ''}`}
+								className={`bg-[#1111114f] backdrop-blur-lg transition-all duration-300 
+								${
+									accordion === index
+										? 'opacity-0'
+										: 'absolute bottom-0 left-0 right-0 top-0'
+								}`}
 							/>
 						</div>
 					</CardProject>

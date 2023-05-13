@@ -4,8 +4,11 @@ import { useEffect, useState } from 'react';
 export const useLocalStorage = (key: string, initialValue: string) => {
 	const [storedValue, setStoredValue] = useState(() => {
 		try {
+			// window only on client side
+			const windowClient = typeof window !== 'undefined';
+
 			// Get from local storage by key
-			const item = window.localStorage.getItem(key);
+			const item = windowClient ? window.localStorage.getItem(key) : null;
 
 			// Parse stored json of ir none return initialValue
 			return item ? JSON.parse(item) : initialValue;
