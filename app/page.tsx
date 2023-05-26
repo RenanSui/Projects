@@ -65,7 +65,7 @@ export default function Home() {
 			className={`h-screen text-zinc-900 transition-all duration-500 dark:text-zinc-300 
 			${lightTheme} ${darkTheme}`}
 		>
-			<div className="absolute left-1/2 top-1/2 flex w-[calc(100%_-_4px)] -translate-x-1/2 -translate-y-1/2 justify-center transition-all duration-300 ">
+			<div className="absolute left-1/2 top-1/2 z-10 flex w-[calc(100%_-_4px)] -translate-x-1/2 -translate-y-1/2 justify-center transition-all duration-300">
 				{Projects.map((project, index) => (
 					<CardProject
 						key={index}
@@ -158,6 +158,14 @@ export default function Home() {
 						</div>
 					</CardProject>
 				))}
+			</div>
+
+			<div className="containerSvg absolute bottom-0 left-0 right-0 top-0 opacity-20 ">
+				<svg>
+					<filter id="grainy">
+						<feTurbulence type="turbulence" baseFrequency="0.65" />
+					</filter>
+				</svg>
 			</div>
 
 			<button
